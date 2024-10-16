@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Functionality {
@@ -13,5 +17,25 @@ public class Functionality {
 
         return student;
     }
+    public void addToDb(Student newStudent) throws IOException {
+        ArrayList<String> studentData = new ArrayList<>();
+        studentData.add(newStudent.name);
+        studentData.add(newStudent.surname);
+        studentData.add(newStudent.email);
+        studentData.add(newStudent.group);
 
+        FileWriter writer = new FileWriter("db.csv");
+        writer.append("NAME | ");
+        writer.append("SURNAME | ");
+        writer.append("EMAIL | ");
+        writer.append("GROUP | ");
+        writer.append("\n");
+        for (String studentRow: studentData) {
+            writer.append(String.join(" | ",studentRow));
+            writer.append(" | ");
+
+        }
+        writer.flush();
+        writer.close();
+    }
 }
