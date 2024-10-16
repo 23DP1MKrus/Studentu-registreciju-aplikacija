@@ -1,7 +1,6 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Functionality {
@@ -38,4 +37,16 @@ public class Functionality {
         writer.flush();
         writer.close();
     }
+    public static List<String> readingLines(File file) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        List<String> lines = new ArrayList<>();
+        String line = null;
+        while((line = reader.readLine()) != null){
+            lines.add(line);
+        }
+
+
+        return lines;
+    }
+
 }
