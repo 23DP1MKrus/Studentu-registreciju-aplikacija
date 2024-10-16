@@ -24,18 +24,34 @@ public class Functionality {
         studentData.add(newStudent.group);
 
         FileWriter writer = new FileWriter("db.csv",true);
-        writer.append("NAME | ");
-        writer.append("SURNAME | ");
-        writer.append("EMAIL | ");
-        writer.append("GROUP | ");
-        writer.append("\n");
-        for (String studentRow: studentData) {
-            writer.append(String.join(" | ",studentRow));
-            writer.append(" | ");
+        try{
+            startCsvFile();
+            writer.append("\n");
+            for (String studentRow: studentData) {
+                writer.append(String.join(" | ",studentRow));
+                writer.append(" | ");
 
+            }
+            writer.flush();
+            writer.close();
         }
-        writer.flush();
-        writer.close();
+        catch (IndexOutOfBoundsException e){
+            writer.append("NAME | ");
+            writer.append("SURNAME | ");
+            writer.append("EMAIL | ");
+            writer.append("GROUP | ");
+            writer.append("\n");
+
+            for (String studentRow: studentData) {
+                writer.append(String.join(" | ",studentRow));
+                writer.append(" | ");
+
+            }
+            writer.append("\n");
+            writer.flush();
+            writer.close();
+        }
+
     }
     public static List<String> readingLines(File file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -48,5 +64,18 @@ public class Functionality {
 
         return lines;
     }
+    public static void startCsvFile() throws IOException {
+        FileWriter writer = new FileWriter("db.csv",true);
+        File database = new File("db.csv");
+        String firstLine = readingLines(database).get(0);
+        if(!firstLine.equals("NAME | SURNAME | EMAIL | GROUP |".trim())){
+            writer.append("NAME | ");
+            writer.append("SURNAME | ");
+            writer.append("EMAIL | ");
+            writer.append("GROUP | ");
+            writer.append("\n");
+        }
+    }
+
 
 }
