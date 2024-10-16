@@ -24,7 +24,7 @@ public class Functionality {
         studentData.add(newStudent.email);
         studentData.add(newStudent.group);
 
-        FileWriter writer = new FileWriter("db.csv");
+        FileWriter writer = new FileWriter("db.csv",true);
         writer.append("NAME | ");
         writer.append("SURNAME | ");
         writer.append("EMAIL | ");
