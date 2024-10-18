@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Functionality {
-    public Student creatingStudent(){
+    public static Student creatingStudent(){
         Scanner scanner = new Scanner(System.in);
         Student student = new Student();
 
@@ -54,7 +54,7 @@ public class Functionality {
         }
 
     }
-    public List<String> readingLines(File file) throws IOException {
+    public static List<String> readingLines(File file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         List<String> lines = new ArrayList<>();
         String line = null;
@@ -65,7 +65,7 @@ public class Functionality {
 
         return lines;
     }
-    public void startCsvFile() throws IOException {
+    public static void startCsvFile() throws IOException {
         FileWriter writer = new FileWriter("db.csv",true);
         File database = new File("db.csv");
         String firstLine = readingLines(database).get(0);
@@ -78,7 +78,7 @@ public class Functionality {
         }
     }
 
-    public void removingAlgorithm(List<String> dataFromCsv, String studentName) throws IOException {
+    public static void removingAlgorithm(List<String> dataFromCsv, String studentName) throws IOException {
         dataFromCsv.removeIf(line -> line.contains(studentName));
         dataFromCsv.removeAll(Arrays.asList("",null));
         FileWriter writer = new FileWriter("db.csv",false);
@@ -97,5 +97,14 @@ public class Functionality {
         System.out.println("Write down name to delete:");
         String nameToDelete = scanner.nextLine();
         removingAlgorithm(readingLines(database),nameToDelete);
+    }
+    public static void printingStudents(List<String> database){
+        for (String line: database) {
+            System.out.println(line);
+        }
+    }
+    public void show() throws IOException {
+        File database = new File("db.csv");
+        printingStudents(readingLines(database));
     }
 }
