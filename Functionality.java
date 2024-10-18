@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -53,7 +54,7 @@ public class Functionality {
         }
 
     }
-    public static List<String> readingLines(File file) throws IOException {
+    public List<String> readingLines(File file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         List<String> lines = new ArrayList<>();
         String line = null;
@@ -64,7 +65,7 @@ public class Functionality {
 
         return lines;
     }
-    public static void startCsvFile() throws IOException {
+    public void startCsvFile() throws IOException {
         FileWriter writer = new FileWriter("db.csv",true);
         File database = new File("db.csv");
         String firstLine = readingLines(database).get(0);
@@ -77,5 +78,24 @@ public class Functionality {
         }
     }
 
+    public void removingAlgorithm(List<String> dataFromCsv, String studentName) throws IOException {
+        dataFromCsv.removeIf(line -> line.contains(studentName));
+        dataFromCsv.removeAll(Arrays.asList("",null));
+        FileWriter writer = new FileWriter("db.csv",false);
+        for (String line: dataFromCsv) {
+            writer.append(line);
+            writer.append("\n");
+            }
 
+        writer.flush();
+        writer.close();
+
+    }
+    public void remove() throws IOException {
+        File database = new File("db.csv");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Write down name to delete:");
+        String nameToDelete = scanner.nextLine();
+        removingAlgorithm(readingLines(database),nameToDelete);
+    }
 }
