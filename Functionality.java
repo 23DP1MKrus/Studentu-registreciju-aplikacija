@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Functionality {
+    static ConsoleColor color = new ConsoleColor();
     public static Student creatingStudent(){
         Scanner scanner = new Scanner(System.in);
         Student student = new Student();
@@ -99,8 +100,10 @@ public class Functionality {
         removingAlgorithm(readingLines(database),nameToDelete);
     }
     public static void printingStudents(List<String> database){
-        for (String line: database) {
-            System.out.println(line);
+
+        System.out.println(color.ANSI_RED + database.get(0) + color.ANSI_RESET);
+        for (int i = 1; i < database.size(); i++) {
+            System.out.println(color.ANSI_GREEN + database.get(i) + color.ANSI_RESET);
         }
     }
     public void show() throws IOException {
