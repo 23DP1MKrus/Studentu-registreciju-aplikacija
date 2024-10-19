@@ -8,42 +8,45 @@ public class Functionality {
     static ConsoleColor color = new ConsoleColor();
     public static Student creatingStudent(){
         Scanner scanner = new Scanner(System.in);
-        Student student = new Student();
 
         System.out.println(color.ANSI_GREEN_BACKGROUND + "Please enter student name:" + color.ANSI_RESET);
-        student.name = scanner.nextLine();
+        String name = scanner.nextLine();
 
         System.out.println(color.ANSI_GREEN_BACKGROUND + "Please enter student surname:" + color.ANSI_RESET);
-        student.surname = scanner.nextLine();
+        String surname = scanner.nextLine();
 
         System.out.println(color.ANSI_GREEN_BACKGROUND + "Please enter student email:" + color.ANSI_RESET);
-        student.email = scanner.nextLine();
+        String email = scanner.nextLine();
 
         System.out.println(color.ANSI_GREEN_BACKGROUND + "Please enter student group:" + color.ANSI_RESET);
-        student.group = scanner.nextLine();
+        String group = scanner.nextLine();
 
-        System.out.printf(color.ANSI_GREEN + "Added student name: %s | surname: %s | email: %s | group: %s %n",student.name,student.surname,student.email,student.group + color.ANSI_RESET);
+        Student student = new Student(name,surname,email,group);
+
+
+
+        System.out.printf(color.ANSI_GREEN + "Added student name: %s | surname: %s | email: %s | group: %s %n", student.getName(), student.getSurname(), student.getEmail(), student.getGroup() + color.ANSI_RESET);
 
         return student;
     }
     public void addToDb(Student newStudent) throws IOException {
         ArrayList<String> studentData = new ArrayList<>();
-        studentData.add(newStudent.name);
-        studentData.add(newStudent.surname);
-        studentData.add(newStudent.email);
-        studentData.add(newStudent.group);
+        studentData.add(newStudent.getName());
+        studentData.add(newStudent.getSurname());
+        studentData.add(newStudent.getEmail());
+        studentData.add(newStudent.getGroup());
 
 
 
         FileWriter writer = new FileWriter("db.csv",true);
         try{
             startCsvFile();
-            writer.append("\n");
             for (String studentRow: studentData) {
                 writer.append(String.join(" | ",studentRow));
                 writer.append(" | ");
 
             }
+            writer.append("\n");
             writer.flush();
             writer.close();
         }
@@ -72,6 +75,8 @@ public class Functionality {
         while((line = reader.readLine()) != null){
             lines.add(line);
         }
+
+
 
 
         return lines;
