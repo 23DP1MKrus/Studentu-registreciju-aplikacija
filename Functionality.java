@@ -90,13 +90,16 @@ public class Functionality {
     }
 
     public static void removingAlgorithm(List<String> dataFromCsv, String studentName) throws IOException {
-
+        int countOfNames = 0;
         for (String line: dataFromCsv) {
             if(line.contains(studentName)){
                 System.out.printf(color.ANSI_RED + "Removed: %s!%n", line + color.ANSI_RESET);
+                countOfNames++;
             }
         }
-
+        if (countOfNames == 0 ){
+            System.out.println(color.ANSI_RED + " Error: no such student was found!" + color.ANSI_RESET);
+        }
         dataFromCsv.removeIf(line -> line.contains(studentName));
         dataFromCsv.removeAll(Arrays.asList("",null));
         FileWriter writer = new FileWriter("db.csv",false);
