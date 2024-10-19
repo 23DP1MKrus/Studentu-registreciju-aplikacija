@@ -10,11 +10,19 @@ public class Functionality {
         Scanner scanner = new Scanner(System.in);
         Student student = new Student();
 
+        System.out.println(color.ANSI_GREEN_BACKGROUND + "Please enter student name:" + color.ANSI_RESET);
         student.name = scanner.nextLine();
+
+        System.out.println(color.ANSI_GREEN_BACKGROUND + "Please enter student surname:" + color.ANSI_RESET);
         student.surname = scanner.nextLine();
+
+        System.out.println(color.ANSI_GREEN_BACKGROUND + "Please enter student email:" + color.ANSI_RESET);
         student.email = scanner.nextLine();
+
+        System.out.println(color.ANSI_GREEN_BACKGROUND + "Please enter student group:" + color.ANSI_RESET);
         student.group = scanner.nextLine();
 
+        System.out.printf(color.ANSI_GREEN + "Added student name: %s | surname: %s | email: %s | group: %s %n",student.name,student.surname,student.email,student.group + color.ANSI_RESET);
 
         return student;
     }
@@ -24,6 +32,8 @@ public class Functionality {
         studentData.add(newStudent.surname);
         studentData.add(newStudent.email);
         studentData.add(newStudent.group);
+
+
 
         FileWriter writer = new FileWriter("db.csv",true);
         try{
@@ -80,7 +90,15 @@ public class Functionality {
     }
 
     public static void removingAlgorithm(List<String> dataFromCsv, String studentName) throws IOException {
-        dataFromCsv.removeIf(line -> line.contains(studentName));
+
+        for (String line: dataFromCsv) {
+            if(line.contains(studentName)){
+                System.out.printf(color.ANSI_RED + "Removed %s!%n", line + color.ANSI_RESET);
+                dataFromCsv.remove(line);
+            }
+
+        }
+
         dataFromCsv.removeAll(Arrays.asList("",null));
         FileWriter writer = new FileWriter("db.csv",false);
         for (String line: dataFromCsv) {
@@ -95,15 +113,15 @@ public class Functionality {
     public void remove() throws IOException {
         File database = new File("db.csv");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Write down name to delete:");
+        System.out.println(color.ANSI_RED_BACKGROUND + "Write down name to delete:" + color.ANSI_RESET);
         String nameToDelete = scanner.nextLine();
         removingAlgorithm(readingLines(database),nameToDelete);
     }
     public static void printingStudents(List<String> database){
 
-        System.out.println(color.ANSI_RED + database.get(0) + color.ANSI_RESET);
+        System.out.println(color.ANSI_YELLOW_BACKGROUND+ database.get(0) + color.ANSI_RESET);
         for (int i = 1; i < database.size(); i++) {
-            System.out.println(color.ANSI_GREEN + database.get(i) + color.ANSI_RESET);
+            System.out.println(color.ANSI_YELLOW + database.get(i) + color.ANSI_RESET);
         }
     }
     public void show() throws IOException {
