@@ -25,7 +25,7 @@ public class Functionality {
 
 
 
-        System.out.printf(color.ANSI_GREEN + "Added student name: %s | surname: %s | email: %s | group: %s %n", student.getName(), student.getSurname(), student.getEmail(), student.getGroup() + color.ANSI_RESET);
+        System.out.printf(color.ANSI_GREEN + "Added %s!%n",student + color.ANSI_RESET);
 
         return student;
     }

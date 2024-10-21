@@ -11,6 +11,8 @@ public class Student {
       this.group = group;
    }
 
+
+
    public String getName() {
       return name;
    }
@@ -41,5 +43,14 @@ public class Student {
 
    public void setGroup(String group) {
       this.group = group;
+   }
+
+   @Override
+   public String toString() {
+      return "student with " +
+              "name: " + name +
+              ", surname: " + surname +
+              ", email: " + email +
+              ", group: " + group;
    }
 }
