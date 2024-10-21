@@ -68,7 +68,7 @@ public class Functionality {
         }
 
     }
-    public static List<String> readingLines(File file) throws IOException {
+    private static List<String> readingLines(File file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         List<String> lines = new ArrayList<>();
         String line = null;
@@ -81,7 +81,7 @@ public class Functionality {
 
         return lines;
     }
-    public static void startCsvFile() throws IOException {
+    private static void startCsvFile() throws IOException {
         FileWriter writer = new FileWriter("db.csv",true);
         File database = new File("db.csv");
         String firstLine = readingLines(database).get(0);
@@ -94,7 +94,7 @@ public class Functionality {
         }
     }
 
-    public static void removingAlgorithm(List<String> dataFromCsv, String studentName) throws IOException {
+    private static void removingAlgorithm(List<String> dataFromCsv, String studentName) throws IOException {
         int countOfNames = 0;
         for (String line: dataFromCsv) {
             if(line.contains(studentName)){
@@ -124,7 +124,7 @@ public class Functionality {
         String nameToDelete = scanner.nextLine();
         removingAlgorithm(readingLines(database),nameToDelete);
     }
-    public static void printingStudents(List<String> database){
+    private static void printingStudents(List<String> database){
 
         System.out.println(color.ANSI_YELLOW_BACKGROUND+ database.get(0) + color.ANSI_RESET);
         for (int i = 1; i < database.size(); i++) {
